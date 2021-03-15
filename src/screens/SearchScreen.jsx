@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import ResultsList from "../Components/ResultsList";
 import SearchBar from "../Components/SearchBar";
@@ -16,30 +16,35 @@ const SearchScreen = () => {
     };
 
     return (
-        <View>
+        <>
             <SearchBar
                 term={term}
                 onTermChange={setTerm}
                 onTermSubmit={ () => searchApi(term)}
             />
             { errorMessage ? <Text>{errorMessage}</Text> : null }
-            <Text>We have found {results.length} results</Text>
-            <ResultsList
-                results={filterResultsByPrice('€')}
-                title="Cost Effective"
-            />
-            <ResultsList
-                results={filterResultsByPrice('€€')}
-                title="Bit pricier"
-            />
-            <ResultsList
-                results={filterResultsByPrice('€€€')}
-                title="Big Spender"
-            />
-        </View>
+            <ScrollView>
+                <ResultsList
+                    results={filterResultsByPrice('€')}
+                    title="Cost Effective"
+                />
+                <ResultsList
+                    results={filterResultsByPrice('€€')}
+                    title="Bit pricier"
+                />
+                <ResultsList
+                    results={filterResultsByPrice('€€€')}
+                    title="Big Spender"
+                />
+            </ScrollView>
+        </>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    parentView: {
+        flex: 1
+    }
+});
 
 export default SearchScreen;
