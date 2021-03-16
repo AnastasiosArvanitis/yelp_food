@@ -39,7 +39,7 @@ const SearchScreen = () => {
             </ScrollView>
         </>
     );
-}
+};
 
 const styles = StyleSheet.create({
     parentView: {
